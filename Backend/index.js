@@ -6,32 +6,49 @@ import DbCon from "./libs/db.js";
 import AuthRoutes from "./routes/Auth.routes.js";
 import EventRoutes from "./routes/Event.routes.js";
 
-// ✅ Load environment variables
 dotenv.config();
 
-// ✅ Initialize Express App
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors()); // Allows all origins
+// ✅ Allow credentials + exact origin (NO "*")
+const allowedOrigins = [
+  process.env.FRONTEND_URL, // https://pvpsit-events.vercel.app
+  "http://localhost:5173"
+];
 
-// ✅ JSON body parser & cookie handler
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
+// ✅ Handle preflight OPTIONS for all routes
+app.options("*", cors(corsOptions));
+
+// ✅ Middleware
 app.use(express.json());
 app.use(cookieParser());
 
-// ✅ Connect to MongoDB
+// ✅ Connect DB
 DbCon();
 
-// ✅ Route handlers
+// ✅ Routes
 app.use("/auth", AuthRoutes);
 app.use("/events", EventRoutes);
 
 // ✅ Health check (optional)
 app.get("/", (req, res) => {
-  res.send("API running successfully ✅");
+  res.send("API working ✅");
 });
 
-// ✅ Start Express Server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
