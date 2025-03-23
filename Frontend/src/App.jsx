@@ -7,17 +7,17 @@ import {
   useLocation,
   Navigate,
 } from "react-router-dom";
-import Header from "./components/Header";
-import Navbar from "./components/Navbar/Navbar";
-import FilterBar from "./components/FilterBar/FilterBar";
-import Event from "./components/EventComponent/Event";
-import EventPage from "./components/EventPage/EventPage";
-import Signin from "./components/Logins/SignIn/signin";
-import Signup from "./components/Logins/SignUp/signup";
-import Team from "./components/DesignedBy/Team";
-import AddEvent from "./components/AddEvent/AddEvent";
-import AddStudent from "./components/AddStudent/AddStudent";
-import UpdateEvent from "./components/AddEvent/UpdateEvent";
+import Header from "./components/header.jsx";
+import Navbar from "./components/Navbar/Navbar.jsx";
+import FilterBar from "./components/FilterBar/FilterBar.jsx";
+import Event from "./components/EventComponent/Event.jsx";
+import EventPage from "./components/EventPage/EventPage.jsx";
+import Signin from "./components/Logins/SignIn/signin.jsx";
+import Signup from "./components/Logins/SignUp/signup.jsx";
+import Team from "./components/DesignedBy/Team.jsx";
+import AddEvent from "./components/AddEvent/AddEvent.jsx";
+import AddStudent from "./components/AddStudent/AddStudent.jsx";
+import UpdateEvent from "./components/AddEvent/UpdateEvent.jsx";
 import "./App.css";
 
 function ProtectedRoute({ element, isAuthenticated }) {
