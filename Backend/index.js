@@ -13,37 +13,25 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Allowed frontend origins
-const allowedOrigins = [
-  process.env.FRONTEND_URL,         // e.g., https://pvpsit-events.vercel.app
-  "http://localhost:5173"           // for local development
-];
+app.use(cors()); // Allows all origins
 
-// ✅ CORS Middleware — Allow Frontend Access + Cookies
-app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl)
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true,
-}));
-
-// ✅ Parse JSON & Cookies
+// ✅ JSON body parser & cookie handler
 app.use(express.json());
 app.use(cookieParser());
 
-// ✅ Connect to Database
+// ✅ Connect to MongoDB
 DbCon();
 
-// ✅ Register Routes
+// ✅ Route handlers
 app.use("/auth", AuthRoutes);
 app.use("/events", EventRoutes);
 
-// ✅ Start Server
+// ✅ Health check (optional)
+app.get("/", (req, res) => {
+  res.send("API running successfully ✅");
+});
+
+// ✅ Start Express Server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
