@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import "./Signin.css";
+import "./signin.css";
 
 const Signin = ({ setIsAuthenticated }) => {
   const [identifier, setIdentifier] = useState(""); // Can be email or username
