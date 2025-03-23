@@ -158,7 +158,7 @@ export const Welcome_Email_Template = `
                   <li>Engage with fellow participants and network.</li>
                   <li>Stay informed about new opportunities.</li>
               </ul>
-              <a href="#" class="button">Explore Events</a>
+              <a href="https://pvpsit-events.vercel.app/" class="button">Explore Events</a>
               <p>We look forward to seeing you at our next event. If you need any help, don’t hesitate to reach out!</p>
           </div>
           <div class="footer">
