@@ -136,7 +136,7 @@ function MainContent({
 
       if (token) {
         try {
-          const response = await fetch("${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/user", {
+          const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/user`, {
             method: "GET",
             headers: {
               Authorization: `Bearer ${token}`,
