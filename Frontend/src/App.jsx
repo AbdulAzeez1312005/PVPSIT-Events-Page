@@ -18,6 +18,7 @@ import Team from "./components/DesignedBy/Team.jsx";
 import AddEvent from "./components/AddEvent/AddEvent.jsx";
 import AddStudent from "./components/AddStudent/AddStudent.jsx";
 import UpdateEvent from "./components/AddEvent/UpdateEvent.jsx";
+import ForgotPassword from "./components/Logins/ForgotPassword/ForgotPassword.jsx";
 import "./App.css";
 
 function ProtectedRoute({ element, isAuthenticated }) {
@@ -159,7 +160,7 @@ function MainContent({
     fetchUserRole();
   }, [isAuthenticated]);
 
-  const hideFilterBar = ["/signin", "/signup", "/team"].includes(location.pathname);
+  const hideFilterBar = ["/signin", "/signup", "/team", "/forgot-password"].includes(location.pathname);
 
   return (
     <>
@@ -226,6 +227,7 @@ function MainContent({
             }
           />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/team" element={<Team />} />
           <Route
             path="/add-event"

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import "./signin.css";
+import "./Signin.css";
 
 const Signin = ({ setIsAuthenticated }) => {
   const [identifier, setIdentifier] = useState(""); // Can be email or username
@@ -49,7 +49,6 @@ const Signin = ({ setIsAuthenticated }) => {
       setErrorMessage("Failed to connect to the server. Please try again.");
     }
   };
-  
 
   return (
     <div className="signin-container">
@@ -85,6 +84,10 @@ const Signin = ({ setIsAuthenticated }) => {
 
       <p>
         Don't have an account? <a href="/signup">Sign up here</a>
+      </p>
+
+      <p>
+        <a href="/forgot-password">Forgot Password?</a>
       </p>
     </div>
   );

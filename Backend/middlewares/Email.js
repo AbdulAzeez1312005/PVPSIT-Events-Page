@@ -1,5 +1,6 @@
 import { transporter } from "./Email.config.js";
 import { Verification_Email_Template, Welcome_Email_Template } from "./EmailTemplate.js";
+import { Password_Reset_Email_Template } from "./EmailTemplate.js"; // New email template for OTP
 
 export const sendVerificationEmail = async (email, verificationCode) => {
     if (!verificationCode) {
@@ -31,6 +32,26 @@ export const sendWelcomeEmail = async (email, name) => {
             html: Welcome_Email_Template.replace("{name}", name)
         });
         console.log('Email sent successfully', response);
+    } catch (error) {
+        console.log('Email error', error);
+    }
+};
+
+export const sendPasswordResetEmail = async (email, otp) => {
+    if (!otp) {
+        console.log('OTP is undefined');
+        return;
+    }
+
+    try {
+        const response = await transporter.sendMail({
+            from: '"PVPSIT Events" <your-email@gmail.com>',
+            to: email,
+            subject: "Password Reset OTP",
+            text: "Password Reset OTP",
+            html: Password_Reset_Email_Template.replace("{otp}", otp)
+        });
+        console.log('OTP email sent successfully', response);
     } catch (error) {
         console.log('Email error', error);
     }

@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import { UserModel } from "../models/User.js";
 import { sendVerificationEmail, sendWelcomeEmail } from "../middlewares/Email.js";
 import { generateTokenAndSetCookies } from "../middlewares/GenerateToken.js";
+import { sendPasswordResetEmail } from "../middlewares/Email.js";
+
 
 dotenv.config(); // Load environment variables
 
@@ -283,4 +285,69 @@ const getStudentByIdentifier = async (req, res) => {
     }
 };
 
-export { Register, VerifyEmail, Signin, Logout, getUser, verifyStudent, getStudents, unverifyStudent, getStudentByEmail, getStudentByIdentifier };
+/**
+ * @desc Request Password Reset (Generate OTP)
+ * @route POST /api/auth/request-password-reset
+ */
+const requestPasswordReset = async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        const user = await UserModel.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+
+        // Generate OTP (6 digits)
+        const otp = Math.floor(100000 + Math.random() * 900000).toString();
+        const expiresAt = Date.now() + 10 * 60 * 1000; // OTP expires in 10 minutes
+
+        // Save OTP and expiry time
+        user.resetPasswordToken = otp;
+        user.resetPasswordExpiresAt = expiresAt;
+        await user.save();
+
+        // Send OTP email
+        await sendPasswordResetEmail(user.email, otp);
+
+        return res.status(200).json({ success: true, message: "OTP sent successfully. Please check your email." });
+    } catch (error) {
+        console.error("Password Reset Request Error:", error);
+        return res.status(500).json({ success: false, message: "Something went wrong. Please try again." });
+    }
+};
+
+/**
+ * @desc Reset Password (Validate OTP and change password)
+ * @route POST /api/auth/reset-password
+ */
+const resetPassword = async (req, res) => {
+    const { otp, newPassword } = req.body;
+
+    try {
+        const user = await UserModel.findOne({
+            resetPasswordToken: otp,
+            resetPasswordExpiresAt: { $gt: Date.now() } // Check if OTP has expired
+        });
+
+        if (!user) {
+            return res.status(400).json({ success: false, message: "Invalid or expired OTP" });
+        }
+
+        // Hash the new password
+        const hashedPassword = await bcryptjs.hash(newPassword, 10);
+
+        // Update password and clear OTP fields
+        user.password = hashedPassword;
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpiresAt = undefined;
+        await user.save();
+
+        return res.status(200).json({ success: true, message: "Password has been reset successfully." });
+    } catch (error) {
+        console.error("Password Reset Error:", error);
+        return res.status(500).json({ success: false, message: "Something went wrong. Please try again." });
+    }
+};
+
+export { Register, VerifyEmail, Signin, Logout, getUser, verifyStudent, getStudents, unverifyStudent, getStudentByEmail, getStudentByIdentifier, requestPasswordReset, resetPassword };
