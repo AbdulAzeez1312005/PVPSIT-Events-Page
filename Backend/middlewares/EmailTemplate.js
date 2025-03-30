@@ -126,18 +126,16 @@ export const Welcome_Email_Template = `
               margin: 20px 0;
               background-color: #6200ea;
               color: white;
-              text-decoration: none;
+              text-decoration: none;  /* Remove underline */
               border-radius: 8px;
               font-size: 18px;
               font-weight: bold;
+              border: none;  /* Make it look like a button */
+              cursor: pointer;  /* Show pointer cursor on hover */
               transition: background-color 0.3s;
           }
           .button:hover {
               background-color: #3700b3;
-          }
-          a {
-              text-decoration: none; /* Remove underline */
-              color: white; /* Make the link white */
           }
           .footer {
               background-color: #f4f4f4;
@@ -161,7 +159,8 @@ export const Welcome_Email_Template = `
                   <li>Connect with other participants and network.</li>
                   <li>Stay updated on the latest opportunities.</li>
               </ul>
-              <a href="https://pvpsit-events.vercel.app" class="button">Explore Events</a>
+              <!-- Using a button instead of a link -->
+              <button class="button" onclick="window.location.href='https://pvpsit-events.vercel.app'">Explore Events</button>
               <p>If you need any help or have questions, feel free to reach out.</p>
           </div>
           <div class="footer">
