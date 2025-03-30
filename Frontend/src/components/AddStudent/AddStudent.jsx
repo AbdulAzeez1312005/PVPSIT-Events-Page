@@ -31,43 +31,43 @@ const AddStudent = () => {
   };
 
   const handleAddStudent = async (e) => {
-    e.preventDefault();
-    if (!identifier) {
-      alert("Please enter a student name or email.");
+  e.preventDefault();
+  if (!identifier) {
+    alert("Please enter a student name or email.");
+    return;
+  }
+
+  try {
+    const studentResponse = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/student/${identifier}`, {
+      method: "GET",
+      credentials: "include",
+    });
+
+    if (!studentResponse.ok) {
+      alert("Student not found.");
       return;
     }
 
-    try {
-      const studentResponse = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/student/${identifier}`, {
-        method: "GET",
-        credentials: "include",
-      });
+    const studentData = await studentResponse.json();
+    const studentId = studentData.student._id;
 
-      if (!studentResponse.ok) {
-        alert("Student not found.");
-        return;
-      }
+    const verifyResponse = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/verify-student/${studentId}`, {
+      method: "PUT",
+      credentials: "include",
+    });
 
-      const studentData = await studentResponse.json();
-      const studentId = studentData.student._id;
-
-      const verifyResponse = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/verify-student/${studentId}`, {
-        method: "PUT",
-        credentials: "include",
-      });
-
-      if (verifyResponse.ok) {
-        alert(`Student verified successfully! (ID: ${studentId})`);
-        setIdentifier("");
-        fetchVerifiedStudents();
-        setActiveTab("list");
-      } else {
-        alert("Failed to verify student.");
-      }
-    } catch (error) {
-      console.error("Error verifying student:", error);
+    if (verifyResponse.ok) {
+      alert(`Student verified successfully! (ID: ${studentId})`);
+      setIdentifier("");
+      fetchVerifiedStudents(); // Refresh the student list
+      setActiveTab("list");
+    } else {
+      alert("Failed to verify student.");
     }
-  };
+  } catch (error) {
+    console.error("Error verifying student:", error);
+  }
+};
 
   const handleUnverify = async (id) => {
     try {
