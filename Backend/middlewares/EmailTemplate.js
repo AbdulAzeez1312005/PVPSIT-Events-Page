@@ -135,6 +135,10 @@ export const Welcome_Email_Template = `
           .button:hover {
               background-color: #3700b3;
           }
+          a {
+              text-decoration: none; /* Remove underline */
+              color: white; /* Make the link white */
+          }
           .footer {
               background-color: #f4f4f4;
               padding: 20px;
@@ -149,16 +153,16 @@ export const Welcome_Email_Template = `
       <div class="container">
           <div class="header">Welcome to PVPSIT Events!</div>
           <div class="content">
-              <p class="welcome-message">Hello {name},</p>
-              <p>We’re excited to have you join us! Stay updated with the latest events, activities, and workshops happening at PVPSIT.</p>
-              <p>Here’s how you can get started:</p>
+              <p class="welcome-message">Hi {name},</p>
+              <p>Welcome to the PVPSIT Events community! We're thrilled to have you onboard.</p>
+              <p>Here's how to get started:</p>
               <ul style="text-align: left; margin: 20px auto; width: 80%; list-style: disc;">
-                  <li>Explore upcoming events and register in advance.</li>
-                  <li>Engage with fellow participants and network.</li>
-                  <li>Stay informed about new opportunities.</li>
+                  <li>Browse upcoming events and sign up.</li>
+                  <li>Connect with other participants and network.</li>
+                  <li>Stay updated on the latest opportunities.</li>
               </ul>
               <a href="https://pvpsit-events.vercel.app" class="button">Explore Events</a>
-              <p>We look forward to seeing you at our next event. If you need any help, don’t hesitate to reach out!</p>
+              <p>If you need any help or have questions, feel free to reach out.</p>
           </div>
           <div class="footer">
               <p>&copy; ${new Date().getFullYear()} PVPSIT Events. All rights reserved.</p>
