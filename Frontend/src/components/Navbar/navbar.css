@@ -128,14 +128,6 @@
 }
 
 /* Mobile Button Adjustments */
-@media screen and (max-width: 768px) {
-  .auth-btn {
-    padding: 12px 25px; /* Adjusted padding for smaller screens */
-    font-size: 16px; /* Smaller font for mobile */
-  }
-}
-
-/* Mobile Menu Button */
 .mobile-menu-btn {
   display: none;
   font-size: 26px;
@@ -150,8 +142,29 @@
   color: #f39c12;
 }
 
-/* Mobile Navigation */
+/* Mobile Button Adjustments */
 @media screen and (max-width: 768px) {
+  .auth-btn {
+    padding: 8px 18px; /* Reduced padding for smaller buttons */
+    font-size: 14px; /* Adjust font size to be smaller for mobile */
+  }
+
+  /* Mobile Menu Button */
+  .mobile-menu-btn {
+    display: block;
+    font-size: 24px; /* Smaller icon size for mobile */
+    color: black;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .mobile-menu-btn:hover {
+    color: #f39c12;
+  }
+
+  /* Mobile Navigation */
   .navbar-links {
     display: none;
     flex-direction: column;
@@ -164,16 +177,11 @@
     padding: 20px 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     animation: slideIn 0.3s ease-out;
-    box-sizing: border-box; /* Prevent overflow */
+    box-sizing: border-box;
   }
 
   .navbar-links.active {
     display: flex;
-    text-decoration: none;
-  }
-
-  .mobile-menu-btn {
-    display: block;
   }
 
   /* Mobile Menu Animation */
