@@ -1,0 +1,14 @@
+🎓 **PVPSIT Events Page** – Your Digital Gateway to Campus Life!
+Stay updated, get involved, and never miss a moment with our all-in-one platform for college events. From seminars 📚 and workshops 🛠️ to cultural fests 🎭 and sports 🏅—explore it all in one place.
+
+💻 **Built With:**
+
+* **React + Vite** ⚛️ – Fast, responsive UI
+* **Node.js + Express** 🚀 – Powerful backend APIs
+* **MongoDB Atlas** 🗂️ – Secure cloud database
+* **JWT Auth** 🔐 – Role-based secure access
+* **Multer + Nodemailer** 📤📧 – Image uploads & email alerts
+
+✨ Faculty & verified students can post, manage, and track events. View details, QR codes, and forms with ease.
+
+Start exploring 👉 [pvpsit-events.vercel.app](https://pvpsit-events.vercel.app)
