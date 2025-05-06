@@ -11,4 +11,11 @@ Stay updated, get involved, and never miss a moment with our all-in-one platform
 
 ✨ Faculty & verified students can post, manage, and track events. View details, QR codes, and forms with ease.
 
+👨‍💻 **Developed By:**
+
+* G. Venkata Sai Ram
+* C.S.V.S. Subrahmanyam
+* Abdul Azeez
+* I. Nithyananda Reddy
+
 Start exploring 👉 [pvpsit-events.vercel.app](https://pvpsit-events.vercel.app)
